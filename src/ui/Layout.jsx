@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import DisplayContainer from "../components/DisplayContainer";
 import EventsList from "../components/EventsList";
 import LeftBar from "../components/LeftBar";
 import Navbar from "../components/Navbar";
-import SearchBar from "../components/SearchBar";
 
 const Layout = () => {
+  const [selected, setSelected] = useState({});
+
   return (
-    <div className="w-full min-h-screen bg-red-100">
+    <div className="w-full min-h-screen">
       <Navbar />
-      <SearchBar />
-      <div className="w-full flex justify-between">
+      <div className="w-full min-h-[90vh] flex justify-between">
         <LeftBar />
-        <DisplayContainer />
-        <EventsList />
+        <DisplayContainer selected={selected} />
+        <EventsList selected={selected} setSelected={setSelected} />
       </div>
     </div>
   );
