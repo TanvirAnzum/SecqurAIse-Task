@@ -2,6 +2,7 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
 
 const useFetchImage = (name) => {
+  const [isLoading, setIsLoading] = useState(true);
   const storage = getStorage();
 
   const [source, setSource] = useState("");
@@ -12,6 +13,7 @@ const useFetchImage = (name) => {
       getDownloadURL(starsRef)
         .then((url) => {
           setSource(url);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.log(error);
@@ -19,7 +21,7 @@ const useFetchImage = (name) => {
     }
   }, [name, storage]);
 
-  return source;
+  return [isLoading, source];
 };
 
 export default useFetchImage;

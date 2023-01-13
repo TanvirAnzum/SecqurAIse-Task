@@ -9,13 +9,14 @@ async function fetchData({ location, gender, date }) {
   if (location) queryConstraints.push(where("Location", "==", location));
   if (gender) queryConstraints.push(where("Gender", "==", gender));
   if (date) queryConstraints.push(where("Date", "==", date));
+
   const q = query(dataRef, ...queryConstraints);
   const querySnapshot = await getDocs(q);
 
   querySnapshot.forEach((doc) => {
     response.push(doc.data());
   });
-
+  console.log(response);
   return response;
 }
 

@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../assets/images/logo.webp";
+import { GenderContext } from "../context/GenderContext";
 
 const Navbar = () => {
+  const { genderData } = useContext(GenderContext) || {};
+  const { male, female } = genderData || {};
+
   return (
     <div className="w-full p-5 min-h-[10vh] flex item-center justify-between border">
       <img src={logo} className="w-fit block" alt="logo" />
@@ -12,10 +16,10 @@ const Navbar = () => {
           className="fontAwesome p-2 rounded outline-none focus:ring focus:ring-green-400"
         />
         <p className="py-2 rounded text-black bg-[#92d050] font-semibold w-[4em] flex items-center justify-center ">
-          25
+          {male}
         </p>
         <p className="py-2 rounded text-white  font-semibold w-[4em] flex items-center justify-center bg-[#ff0000]">
-          25
+          {female}
         </p>
       </div>
     </div>
