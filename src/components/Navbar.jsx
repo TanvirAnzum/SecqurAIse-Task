@@ -3,6 +3,7 @@ import logo from "../assets/images/logo.webp";
 import { GenderContext } from "../context/GenderContext";
 
 const Navbar = () => {
+  //fetching latest number of male and female from gender context
   const { genderData } = useContext(GenderContext) || {};
   const { male, female } = genderData || {};
 

@@ -6,13 +6,17 @@ import EventItem from "./EventItem";
 import FilterContainer from "./FilterContainer";
 
 const EventsList = ({ selected, setSelected }) => {
+  // modal for filtering container
   const [modal, setModal] = useState(false);
+
+  // filtered data initialization
   const [filteredData, setFilteredData] = useState({
     location: "",
     gender: "",
     date: "",
   });
 
+  // conditional filter chaining
   const filterParams = {};
   if (filteredData.location && filteredData.location !== "All")
     filterParams.location = filteredData.location;
@@ -20,19 +24,21 @@ const EventsList = ({ selected, setSelected }) => {
     filterParams.gender = filteredData.gender;
   if (filteredData.date) filterParams.date = filteredData.date;
 
+  // useFetchData hook for fetching data with/without filter
   const [data, isLoading] = useFetchData({ ...filterParams });
 
-  console.log(filteredData.date);
-
   useEffect(() => {
+    // for selecting first element from the list and make the first item visible in middle section
     if (data?.length > 0) {
       setSelected(data[0]);
     }
+    // if there is no data then nullify the selected element
     if (!data?.length) {
       setSelected(null);
     }
   }, [data, setSelected]);
 
+  // content variable is used for conditionally rendering loader, no data handling and data fetching
   let content;
   if (isLoading) content = <Loader />;
   else if (!isLoading && !data?.length)

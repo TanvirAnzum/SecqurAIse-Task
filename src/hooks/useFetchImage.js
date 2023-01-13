@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 const useFetchImage = (name) => {
   const [isLoading, setIsLoading] = useState(true);
   const storage = getStorage();
-
   const [source, setSource] = useState("");
 
   useEffect(() => {

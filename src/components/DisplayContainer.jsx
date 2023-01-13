@@ -3,9 +3,13 @@ import useFetchImage from "../hooks/useFetchImage";
 import Loader from "../ui/Loader";
 
 const DisplayContainer = ({ selected }) => {
+  // destructuring properties of selected elements
   const { ID, Location, Date, Time, Gender, Name } = selected || {};
+
+  // useFetchImage is used for retrieving images from firebase storage
   const [isLoading, source] = useFetchImage(Name);
 
+  // content variable is used for conditionally rendering loader, no data handling and data fetching
   let content;
   if (isLoading) content = <Loader />;
   else if (!isLoading && selected)

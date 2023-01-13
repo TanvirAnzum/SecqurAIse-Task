@@ -5,6 +5,7 @@ const FilterContainer = ({ setModal, setFilteredData, filteredData }) => {
   const genderRef = useRef("");
   const dateRef = useRef("");
 
+  // for reseting filters
   const resetHandler = () => {
     setFilteredData({
       location: "",
@@ -16,6 +17,7 @@ const FilterContainer = ({ setModal, setFilteredData, filteredData }) => {
     dateRef.current.value = "";
   };
 
+  // for adding filters
   const submitHandler = () => {
     setFilteredData({
       location: locationRef.current.value,
@@ -26,6 +28,7 @@ const FilterContainer = ({ setModal, setFilteredData, filteredData }) => {
   };
 
   useEffect(() => {
+    // for populating input fields with current filtered data
     const { location, gender, date } = filteredData;
     locationRef.current.value = location ? location : "All";
     genderRef.current.value = gender ? gender : "Both";

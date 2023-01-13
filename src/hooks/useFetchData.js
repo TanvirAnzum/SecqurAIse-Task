@@ -6,8 +6,10 @@ const useFetchData = ({ gender, location, date }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // for updating gender calculations
   const { setGenderData } = useContext(GenderContext) || {};
 
+  // for mapping months from html date elements value
   const months = {
     1: "Jan",
     2: "Feb",
@@ -28,6 +30,10 @@ const useFetchData = ({ gender, location, date }) => {
   useEffect(() => {
     const getData = async () => {
       let newDate = date;
+
+      // default date format is 'YYYY-MM-DD'
+      // here this is formatted to 'dd-mm-yy'
+      // multiply by 1 is used for getting rid of leading zeroes in date and months
       if (date) {
         let formattedDate = date.split("-");
         console.log(formattedDate);
@@ -36,6 +42,7 @@ const useFetchData = ({ gender, location, date }) => {
         }-${formattedDate[0].substr(-2)}`;
       }
 
+      // fetchData function
       const response = await fetchData({
         location,
         gender,
@@ -47,6 +54,7 @@ const useFetchData = ({ gender, location, date }) => {
         female: 0,
       };
 
+      // calculating male and female
       response?.map((item) => {
         if (item.Gender === "Male") genderData.male++;
         else if (item.Gender === "Female") genderData.female++;

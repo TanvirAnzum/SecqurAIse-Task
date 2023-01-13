@@ -2,9 +2,12 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
+// this function is for fetching data with queries from firestore db
 async function fetchData({ location, gender, date }) {
   const response = [];
   const dataRef = collection(db, "data");
+
+  // query chaining
   const queryConstraints = [];
   if (location) queryConstraints.push(where("Location", "==", location));
   if (gender) queryConstraints.push(where("Gender", "==", gender));
@@ -16,7 +19,7 @@ async function fetchData({ location, gender, date }) {
   querySnapshot.forEach((doc) => {
     response.push(doc.data());
   });
-  console.log(response);
+
   return response;
 }
 
